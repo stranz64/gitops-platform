@@ -29,12 +29,12 @@ spec:
         - name: harbor-pull
       
       containers:
-        imagePullPolicy: Always
-        name: nginx
-        - image: harbor.nj.test.lab/applications/nginx:v1
-        resources: {}
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
+        - name: nginx
+          image: harbor.nj.test.lab/applications/nginx:v1
+          imagePullPolicy: Always
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

@@ -25,8 +25,11 @@ spec:
       labels:
         app: nginx
     spec:
+      imagePullSecrets: 
+        - name: harbor-pull
+
       containers:
-      - image: nginx
+        - image: harbor.nj.test.lab/applications/nginx:v1
         imagePullPolicy: Always
         name: nginx
         resources: {}

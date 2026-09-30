@@ -1,0 +1,32 @@
+grafana:
+  adminPassword: Dynamips64
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+
+    hosts:
+      - grafana.nj.test.lab
+
+    tls:
+      - secretName: grafana-tls
+        hosts:
+          - grafana.nj.test.lab
+
+  persistence:
+    enabled: true
+    storageClassName: rook-ceph-block
+    size: 10Gi
+
+prometheus:
+  prometheusSpec:
+    storageSpec:
+      volumeClaimTemplate:  
+      spec:
+        storageClassName: rook-ceph-block
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 25Gi
+          

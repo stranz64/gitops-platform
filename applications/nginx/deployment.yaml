@@ -10,7 +10,7 @@ metadata:
   resourceVersion: "864319"
 spec:
   progressDeadlineSeconds: 600
-  replicas: 2
+  replicas: 3
   revisionHistoryLimit: 10
   syncPolicy:
     automated:

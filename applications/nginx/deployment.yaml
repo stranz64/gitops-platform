@@ -12,6 +12,10 @@ spec:
   progressDeadlineSeconds: 600
   replicas: 4
   revisionHistoryLimit: 10
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
   selector:
     matchLabels:
       app: nginx

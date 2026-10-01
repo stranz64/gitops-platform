@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: nginxv2
+  namespace: argocd
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/stranz64/gitops-platform.git
+    targetRevision: HEAD
+    path: applications/nginxv2
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

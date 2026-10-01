@@ -5,7 +5,7 @@ metadata:
     app: nginx
   name: nginx
   namespace: default
-  resourceVersion: "4733"
+  resourceVersion: "864155"
 spec:
   clusterIP: 10.233.23.80
   clusterIPs:

@@ -18,15 +18,14 @@ grafana:
     storageClassName: rook-ceph-block
     size: 10Gi
 
-#prometheus:
- # prometheusSpec:
-  #  storageSpec:
-   #   volumeClaimTemplate:  
-    #  spec:
-     #   storageClassName: rook-ceph-block
-      #  accessModes:
-       #   - ReadWriteOnce
-        #resources:
-         # requests:
-          #  storage: 25Gi
-          
+prometheus:
+  prometheusSpec:
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: rook-ceph-block
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 25Gi

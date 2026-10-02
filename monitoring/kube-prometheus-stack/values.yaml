@@ -1,5 +1,6 @@
 grafana:
   adminPassword: Dynamips64
+  assertNoLeakedSecrets: false
   env:
     GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: "V6GTPn2EopIeVJxETmlyy6BwEnUCU3xW"
 

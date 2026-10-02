@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/stranz64/gitops-platform.git
     targetRevision: HEAD
-    path: /security/kyverno
+    path: security/kyverno
 
   destination:
     server: https://kubernetes.default.svc

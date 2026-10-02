@@ -18,6 +18,8 @@ spec:
         app: ollama
 
     spec:
+      nodeSelector:
+        workload: ai
       containers:
         -  name: ollama
            image: ollama/ollama:latest

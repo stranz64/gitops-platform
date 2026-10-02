@@ -2,7 +2,7 @@ grafana:
   adminPassword: Dynamips64
   assertNoLeakedSecrets: false
   env:
-    GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: "V6GTPn2EopIeVJxETmlyy6BwEnUCU3xW"
+    GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: "pVW68avqr6aPONckamVQsNYZ3NKvYcSj"
     GF_AUTH_GENERIC_OAUTH_TLS_SKIP_VERIFY_INSECURE: "true"
 
   grafana.ini:

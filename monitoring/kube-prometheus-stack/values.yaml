@@ -1,6 +1,32 @@
 grafana:
   adminPassword: Dynamips64
 
+ grafana.ini:
+   server:
+     root_url: https://grafana.nj.test.lab
+
+   auth:
+     disable_login_form: false
+
+   auth.generic.oauth:
+     enabled: true
+     name: keycloak
+     allow_sign_up: true
+
+     client_id: grafana
+     cliente_secret: nrvxaIVTjeQmeYjaDl0Ip9UgXveRETvg
+
+     scopes: openid profile email
+
+     auth_url: https://keycloak.nj.test.lab/realms/nj-test-lab/protocol/openid-connect/auth
+     token_url: https://keycloak.nj.test.lab/realms/nj-test-lab/protocol/openid-connect/token
+     api_url: https://keycloak.nj.test.lab/realms/nj-test-lab/protocol/openid-connect/userinfo
+
+     role_attribute_path: contains(groups[*], 'grafana-admin') && 'Admin'|| 'Viewer'
+
+     use_pkce: true
+
+
   ingress:
     enabled: false
     ingressClassName: nginx

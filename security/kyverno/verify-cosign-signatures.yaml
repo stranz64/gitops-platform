@@ -1,0 +1,31 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: verify-cosign-signatures
+
+spec:
+  validationFailureAction: Audit
+  background: false
+
+  rules:
+    - name: verify-images
+
+      match:
+        any:
+        - resources:
+            kinds:
+            - Pod
+
+      verifyImages:
+      - imageReferences:
+        - "harbor.nj.test.lab/*"
+
+       attestors:
+         - count: 1
+           entries:
+             - keys:
+                 publicKeys: |-
+                     -----BEGIN PUBLIC KEY-----
+MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEFeGiySRDAshzeU7115L6h5t9Idy7
+WkLYZL7uoQh2u3W0wD2UYerYuGvmScFG7vomSJB19zbG982bKvaFN6iaPQ==
+-----END PUBLIC KEY-----

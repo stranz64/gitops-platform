@@ -6,7 +6,7 @@ metadata:
   namespace: ai
 
 spec:
-  replicas: 1
+  replicas: 2
 
   selector:
     matchLabels:
@@ -31,11 +31,11 @@ spec:
            resources:
              requests:
                cpu: "2"
-               memory: 4Gi
+               memory: 2Gi
 
              limits:
                cpu: "4"
-               memory: 8Gi
+               memory: 4Gi
 
       volumes:
         - name: models

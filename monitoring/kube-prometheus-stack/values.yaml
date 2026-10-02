@@ -15,6 +15,7 @@ grafana:
       enabled: true
       name: keycloak
       allow_sign_up: true
+      tls_skip_verify_insecure: true
 
       client_id: grafana
       client_secret: $_env{GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET}

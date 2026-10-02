@@ -2,7 +2,7 @@ grafana:
   adminPassword: Dynamips64
 
   ingress:
-    enabled: true
+    enabled: false
     ingressClassName: nginx
 
     hosts:

@@ -20,6 +20,9 @@ spec:
         - imageReferences:
             - "harbor.nj.test.lab/*"
 
+          mutateDigest: false
+          verifiDigest: false
+
        attestors:
          - count: 1
            entries:

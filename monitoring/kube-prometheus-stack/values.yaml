@@ -20,7 +20,7 @@ grafana:
 
 prometheus:
   prometheusSpec:
-    storage:
+    storageSpec:
       volumeClaimTemplate:
         spec:
           storageClassName: rook-ceph-block

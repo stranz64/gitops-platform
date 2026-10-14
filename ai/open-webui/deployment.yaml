@@ -48,8 +48,8 @@ spec:
          cpu: "2"
          memory: "4Gi"
 
-   volumes:
-   - name: data
-     persistentVolumeClaim: 
-       claimName: open-webui-data
+     volumes:
+     - name: data
+       persistentVolumeClaim: 
+         claimName: open-webui-data
  

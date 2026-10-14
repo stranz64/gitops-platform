@@ -35,6 +35,9 @@ spec:
        - name: ENABLE_OAUTH_SIGNUP
          value: "true"
 
+       - name: WEBUI_AUTH
+         value: "true"
+
        - name: ENABLE_LOGIN_FORM
          value: "true"
 
@@ -49,6 +52,9 @@ spec:
 
        - name: OAUTH_CLIENT_ID
          value: "open-webui"
+
+       - name: OAUTH_SCOPE
+         value: "openid email profile"
 
        - name: OAUTH_CLIENT SECRET
          valueFrom:

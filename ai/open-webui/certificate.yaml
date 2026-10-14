@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: chat-tls
+  namespace: open-webui
+spec:
+  secretName: chat-tls
+
+  dnsNames:
+  - chat.nj.test.lab
+
+  issuerRef:
+    name: nj-lab-ca
+    kind: ClusterIssuer

@@ -17,36 +17,36 @@ spec:
         app: open-webui
 
 
-  spec:
-   imagePullSecrets:
-   - name: harbor-creds
+    spec:
+     imagePullSecrets:
+     - name: harbor-creds
 
-   containers:
-   - name: open-webui
+     containers:
+     - name: open-webui
 
-     image: harbor.nj.test.lab/ai/open-webui:main
+       image: harbor.nj.test.lab/ai/open-webui:main
 
-     imagePullPolicy: Always
+       imagePullPolicy: Always
 
-     ports:
-     - containerPort: 8080
+       ports:
+       - containerPort: 8080
 
-     env:
-     - name: OLLAMA_BASE_URL
-       value: http://ollama.ai.svc.cluster.local:11434
+       env:
+       - name: OLLAMA_BASE_URL
+         value: http://ollama.ai.svc.cluster.local:11434
 
-     volumeMounts:
-     - mountPath: /app/backend/data
-       name: data
+       volumeMounts:
+       - mountPath: /app/backend/data
+         name: data
 
-     resources:
-       requests:
-         cpu: "500m"
-         memory: "1Gi"
+       resources:
+         requests:
+           cpu: "500m"
+           memory: "1Gi"
 
-       limits:
-         cpu: "2"
-         memory: "4Gi"
+         limits:
+           cpu: "2"
+           memory: "4Gi"
 
      volumes:
      - name: data

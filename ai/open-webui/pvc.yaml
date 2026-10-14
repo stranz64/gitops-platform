@@ -7,7 +7,7 @@ spec:
   accessModes:
     - ReadWriteOnce
 
-  storageClassname: rook-ceph-block
+  storageClassName: rook-ceph-block
 
   resources:
     requests:

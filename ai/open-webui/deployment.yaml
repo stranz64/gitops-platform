@@ -63,7 +63,7 @@ spec:
              key: client-secret
 
        - name: OLLAMA_BASE_URL
-         value: http://ollama.ai.svc.cluster.local:11434
+         value: "http://ollama.ai.svc.cluster.local:11434"
 
        volumeMounts:
        - mountPath: /app/backend/data

@@ -38,6 +38,9 @@ spec:
        - name: WEBUI_AUTH
          value: "true"
 
+       - name: OAUTH_AUTO_REDIRECT
+         value: "true"
+
        - name: ENABLE_LOGIN_FORM
          value: "true"
 

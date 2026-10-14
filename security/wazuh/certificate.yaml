@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wazuh-tls
+  namespace: wazuh
+
+spec:
+  secretName: wazuh-tls
+
+  dnsNames:
+    - wazuh.nj.test.lab
+
+  issuerRef:
+    name: nj-test-lab
+    kind: ClusterIssuer

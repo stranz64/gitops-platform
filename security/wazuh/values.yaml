@@ -1,0 +1,91 @@
+global:
+  imagePullSecrets:
+    - harbor-creds
+
+indexer:
+  replicas: 1
+
+  image:
+    repository: harbor.nj.test.lab/security/wazuh-indexer
+    tag: "4.13.1"
+
+  persistence:
+    enabled: true
+    storageClass: rook-ceph-block
+    size: 100Gi
+
+  resources:
+    requests:
+      cpu: "2"
+      memory: "4Gi"
+
+    limits:
+      cpu: "4"
+      memory: "8Gi"
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+              - key: workload
+                operator: In
+                values:
+                  - general
+
+manager:
+  replicas: 1
+
+  image:
+    repository: harbor.nj.test.lab/security/wazuh-manager
+    tag: "4.13.1"
+
+  persistence:
+    enabled: true
+    storageClass: rook-ceph-block
+    size: 20Gi
+
+  resources:
+    requests:
+      cpu: "1"
+      memory: "2Gi"
+
+    limits:
+      cpu: "2"
+      memory: "4Gi"
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+              - key: workload
+                operator: In
+                values:
+                  - general
+
+dashboard:
+  replicas: 1
+
+  image:
+    repository: harbor.nj.test.lab/security/wazuh-dashboard
+    tag: "4.13.1"
+
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+
+    limits:
+      cpu: "2"
+      memory: "2Gi"
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+              - key: workload
+                operator: In
+                values:
+                  - general

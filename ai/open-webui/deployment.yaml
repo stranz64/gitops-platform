@@ -38,6 +38,9 @@ spec:
        - name: WEBUI_AUTH
          value: "true"
 
+       - name: WEBUI_URL
+         value: "https://chat.nj.test.lab"
+
        - name: OAUTH_AUTO_REDIRECT
          value: "true"
 

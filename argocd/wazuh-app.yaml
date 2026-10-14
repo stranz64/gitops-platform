@@ -9,9 +9,9 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/wazuh/wazuh-kubernetes.git
-    targetRevision: v4.13.1
-    path: wazuh
+    repoURL: https://github.com/stranz64/gitops-platform.git
+    targetRevision: main
+    path: security/wazuh
     helm:
       valueFiles:
         - values.yaml

@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: n8n
+  namespace: automation
+
+spec:
+  ingressClassName: nginx
+
+  tls:
+  - secretName: n8n-tls
+    hosts:
+    - n8n.nj.test.lab
+
+  rules:
+  - host: n8n.nj.test.lab
+
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+
+        backend:
+          service:
+            name: n8n
+            port:
+              number: 5678

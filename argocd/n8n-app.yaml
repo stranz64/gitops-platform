@@ -3,7 +3,7 @@ kind: Application
 
 metadata:
   name: n8n
-  name: argocd
+  namespace: argocd
 
 spec:
   project: default

@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: n8n
+  name: automation
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/stranz64/gitops-platform.git
+    targetRevision: main
+    path: automation/n8n
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: automation
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true

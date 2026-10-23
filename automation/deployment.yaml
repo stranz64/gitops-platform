@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Deployment
+
+metadata:
+  name: n8n
+  namespace: automation
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: n8n
+
+  template:
+    metadata:
+      labels:
+        app: n8n
+
+
+    spec:
+
+      imagePullSecrets:
+      - name: harbor-creds
+
+      containers:
+      - name: n8n
+
+        image: harbor.nj.test.lab/automation/n8n:latest
+
+        ports:
+        - containerPort: 5678
+
+        env:
+        - name: N8N_HOST
+          value: n8n.nj.test.lab
+
+        - name: N8N_PROTOCOL
+          value: https
+
+        - name: TZ
+          value: America/New York
+
+        volumeMounts:
+        - name: data
+          mountPath: /home/node/.n8n
+
+
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: n8n-data
+

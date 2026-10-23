@@ -1,0 +1,36 @@
+image:
+  registry: harbor.nj.test.lab
+  repository: security/falco
+  tag: 0.45.0
+
+imagePullSecrets:
+  - name: harbor-creds
+
+falco:
+  grpc:
+    enabled: true
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 512Mi
+
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+
+
+tolerations:
+  - operator: Exists
+
+nodeSelector: {}
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: workload
+          operator: NotIn
+          values:
+            - storage

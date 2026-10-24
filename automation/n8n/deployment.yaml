@@ -23,6 +23,9 @@ spec:
       imagePullSecrets:
       - name: harbor-creds
 
+      securityContext:
+        fsGroup: 1000
+
       containers:
       - name: n8n
 
@@ -37,6 +40,9 @@ spec:
 
         - name: N8N_PROTOCOL
           value: https
+
+        - name: N8N_PORT
+          value: "5678"
 
         - name: TZ
           value: America/New York

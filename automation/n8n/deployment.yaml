@@ -44,6 +44,9 @@ spec:
         - name: N8N_PORT
           value: "5678"
 
+        - name: WEBHOOK_URL
+          value: https://n8n.nj.test.lab
+
         - name: TZ
           value: America/New York
 

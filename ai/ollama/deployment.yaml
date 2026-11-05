@@ -32,12 +32,12 @@ spec:
 
            resources:
              requests:
-               cpu: "8"
-               memory: 12Gi
+               cpu: "2"
+               memory: "8Gi"
 
              limits:
-               cpu: "8"
-               memory: 16Gi
+               cpu: "6"
+               memory: "16Gi"
                nvidia.com/gpu: 1
 
       volumes:

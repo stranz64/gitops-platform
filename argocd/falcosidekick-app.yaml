@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: falcosidekick
+  namespace: argocd
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://falcosecurity.github.io/charts
+    chart: falcosidekick
+    targetRevision: 0.12.0
+
+    helm:
+      values: |
+        webhook:
+          enabled: true
+
+        config:
+          webhook:
+            address: "https://n8n.nj.test.lab/webhook/security-alert"
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: falco
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+  syncOptions:
+   - CreateNamespace=true

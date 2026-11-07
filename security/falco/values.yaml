@@ -13,9 +13,12 @@ falco:
 falcosidekick:
   enabled: true
 
+  webui:
+    enabled: false
+
   config:
     webhook:
-      address: "https;//n8n.nj.test.lab/webhook/security-alert" 
+      address: "https://n8n.nj.test.lab/webhook/security-alert" 
 
 
 resources:

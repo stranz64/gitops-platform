@@ -17,6 +17,10 @@ spec:
       valueFiles:
         - values.yaml
 
+      values: |
+        falcosidekick:
+          enabled: true
+
   destination:
     server: https://kubernetes.default.svc
     namespace: falco
@@ -28,6 +32,3 @@ spec:
 
     syncOptions:
      - CreateNamespace=true
-
-falcosidekick:
-  enabled: true

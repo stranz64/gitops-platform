@@ -28,3 +28,6 @@ spec:
 
     syncOptions:
      - CreateNamespace=true
+
+falcosidekick:
+  enabled: true

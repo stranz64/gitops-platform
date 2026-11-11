@@ -24,7 +24,7 @@ spec:
           config:
             webhook:
               address: "https://n8n.nj.test.lab/webhook/security-alert"
-
+              checkcert: false
 
   destination:
     server: https://kubernetes.default.svc

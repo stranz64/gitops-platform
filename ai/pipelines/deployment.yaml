@@ -22,7 +22,7 @@ spec:
       containers:
       - name: pipelines
 
-        image: ghrc.io/open-webui/pipelines:main
+        image: ghcr.io/open-webui/pipelines:main
 
         ports:
         - containerPort: 9099

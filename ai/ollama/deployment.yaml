@@ -25,6 +25,9 @@ spec:
            image: ollama/ollama:latest
            ports:
              - containerPort: 11434
+           env:
+           - name: OLLAMA_KEEP_ALIVE
+             value: "24h"
 
            volumeMounts:
              - name: models
@@ -32,8 +35,9 @@ spec:
 
            resources:
              requests:
-               cpu: "2"
+               cpu: "4"
                memory: "8Gi"
+               nvidia.com/gpu: 1
 
              limits:
                cpu: "6"

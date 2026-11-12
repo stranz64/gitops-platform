@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: pipelines
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: pipelines
+
+
+  template:
+    metadata:
+      labels:
+        app: pipelines
+
+
+    spec:
+      containers:
+      - name: pipelines
+
+        image: ghrc.io/open-webui/pipelines:main
+
+        ports:
+        - containerPort: 9099
+
+        env:
+        - name: PIPELINES_API_KEY
+          value: changeme
+
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: pipelines
+
+spec:
+  selector:
+    app: pipelines
+
+  ports:
+  - port: 9099
+    targetPort: 9099

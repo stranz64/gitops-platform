@@ -74,6 +74,9 @@ spec:
        - name: OLLAMA_BASE_URL
          value: "http://ollama.ai.svc.cluster.local:11434"
 
+       - name: PIPELINES_URL
+         value: "http://pipelines.open-webui.svc.cluster.local:9099"
+
        volumeMounts:
        - mountPath: /app/backend/data
          name: data

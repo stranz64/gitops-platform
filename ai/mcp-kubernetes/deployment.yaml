@@ -21,6 +21,9 @@ spec:
     spec:
       ServiceAccountName: mcp-k8s
 
+      nodeSelector:
+        role: security
+
       containers:
       - name: mcp-kubernetes
 

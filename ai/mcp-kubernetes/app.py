@@ -197,11 +197,11 @@ def cluster_summary():
 
     custom_api = client.CustomObjectsApi()
 
-    apps = custom_api.list_cluster_custom_object(
-         group="argoproj.io",
-         version="v1alpha1",
-         namespace="argocd",
-         plural="applications"
+    apps = custom_api.list_namespaced_custom_object(
+         "argoproj.io",
+         "v1alpha1",
+         "argocd",
+         "applications"
     )
 
     out_of_sync = 0
@@ -209,10 +209,15 @@ def cluster_summary():
 
     for app_item in apps["items"]:
 
-        if app_item["status"]["sync"]["status"] != "Synced":
+         sync_status = app_item["status"]["sync"]["status"]
+
+         health_status = app_item["status"]["health"]["status"]
+
+
+         if sync_status != "Synced":
            out_of_sync += 1
 
-        if app_item["status"]["sync"]["status"] != "Healthy":
+         if health_status != "Healthy":
            degrade += 1
 
 

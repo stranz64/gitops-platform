@@ -1,4 +1,4 @@
-from fastapi import Fastapi
+from fastapi import FastAPI
 from kubernetes import client, config
 
 app = FastAPI(title="Kubernetes MCP Server")

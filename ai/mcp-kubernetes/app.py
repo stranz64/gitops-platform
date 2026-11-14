@@ -15,7 +15,7 @@ def health():
 
 @app.get("/pods")
 def pods():
-    return = []
+    result = []
 
     for pod in v1.list_pod_for_all_namespaces().items:
         result.append({
@@ -28,7 +28,7 @@ def pods():
 
 @app.get("/nodes")
 def nodes():
-    return = []
+    result = []
 
     for node in v1.list_node().items:
         result.append({
@@ -39,7 +39,7 @@ def nodes():
 
 @app.get("/deployments")
 def deployments():
-    return = []
+    result = []
 
     for deploy in apps.list_deployment_for_all_namespaces().items:
         result.append({

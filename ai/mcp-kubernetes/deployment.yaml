@@ -24,9 +24,40 @@ spec:
       containers:
       - name: mcp-kubernetes
 
-        image: mcp/kubernetes:latest
+        image: harbor.nj.test.lab/ai/mcp-kubernetes:v1
         imagePullPolicy: Always
 
         ports:
         - containerPort: 8080
+
+        env:
+        - name: PYTHONUNBUFFERED
+          value: "1"
+
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+
+          limits:
+            cpu: 500m
+            memory: 512Mi
+
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+
+          initialDelaySeconds: 10
+          periodSeconds: 20
+
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+
+          initialDelaySeconds: 5
+          periodSeconds: 10
+
+
 

@@ -184,9 +184,9 @@ def cluster_summary():
 
     nodes = len(v1.list_node().items)
 
-    pods = v1.lisy_pod_for_all_namespaces().items
+    pods = v1.list_pod_for_all_namespaces().items
 
-    unhealthy =0
+    unhealthy = 0
 
 
     for pod in pods:
@@ -198,8 +198,9 @@ def cluster_summary():
     custom_api = client.CustomObjectsApi()
 
     apps = custom_api.list_cluster_custom_object(
-         groups="argoproj.io",
+         group="argoproj.io",
          version="v1alpha1",
+         namespace="argocd",
          plural="applications"
     )
 

@@ -6,7 +6,7 @@ import os
 app = FastAPI(
     title="Kubernetes MCP Server",
     description="AI agents access to kubernetes cluster",
-    version="2.0"
+    version="2.1"
 )
 
 # Use Service account
@@ -176,3 +176,50 @@ def wazuh_agents():
          "message":
          "Implement API Integration"
     }
+
+
+
+@app.get("/cluster/summary")
+def cluster_summary():
+
+    nodes = len(v1.list_node().items)
+
+    pods = v1.lisy_pod_for_all_namespaces().items
+
+    unhealthy =0
+
+
+    for pod in pods:
+
+        if pod.status.phase != "Running":
+           unhealthy += 1
+
+
+    custom_api = client.CustomObjectsApi()
+
+    apps = custom_api.list_cluster_custom_object(
+         groups="argoproj.io",
+         version="v1alpha1",
+         plural="applications"
+    )
+
+    out_of_sync = 0
+    degraded = 0
+
+    for app_item in apps["items"]:
+
+        if app_item["status"]["sync"]["status"] != "Synced":
+           out_of_sync += 1
+
+        if app_item["status"]["sync"]["status"] != "Healthy":
+           degrade += 1
+
+
+    return {
+        "nodes": nodes,
+        "pods": len(pods),
+        "unhealthyPods": unhealthy,
+        "argocdDegraded": degraded,
+        "argocdOutOfSync": out_of_sync
+
+        }

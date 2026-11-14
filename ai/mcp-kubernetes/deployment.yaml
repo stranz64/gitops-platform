@@ -32,7 +32,7 @@ spec:
       containers:
       - name: mcp-kubernetes
 
-        image: harbor.nj.test.lab/ai/mcp-kubernetes:v5
+        image: harbor.nj.test.lab/ai/mcp-kubernetes:v7
         imagePullPolicy: Always
 
         ports:

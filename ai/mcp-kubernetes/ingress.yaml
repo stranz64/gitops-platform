@@ -8,6 +8,12 @@ metadata:
 spec:
   ingressClassName: nginx
 
+  tls:
+  - hosts:
+      - mcp.nj.test.lab
+    secretName: chat-tls
+
+
   rules:
   - host: mcp.nj.test.lab
 

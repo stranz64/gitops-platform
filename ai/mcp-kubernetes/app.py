@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from kubernetes import client, config
 from pydantic import BaseModel
 import requests
@@ -9,6 +10,15 @@ app = FastAPI(
     description="AI agents access to kubernetes cluster",
     version="2.1"
 )
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headres=["*"],
+)
+
 
 # Use Service account
 config.load_incluster_config()

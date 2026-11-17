@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from kubernetes import client, config
+from pydantic import BaseModel
 import requests
 import os
 
@@ -15,11 +16,58 @@ config.load_incluster_config()
 v1 = client.CoreV1Api()
 apps =  client.AppsV1Api()
 
-@app.get("/health")
+class HealthResponse(BaseModel):
+    status: str
+
+class NodeResponse(BaseModel):
+    name: str
+
+class PodResponse(BaseModel):
+    namespace: str
+    name: str
+    phase: str
+
+class UnhealthyPodResponse(BaseModel):
+    namespace: str
+    pod: str
+    reason: str
+
+class DeploymentResponse(BaseModel):
+    namespace: str
+    name: str
+    ready: int
+    desired: int
+
+class EventResponse(BaseModel):
+    namespace: str
+    resource: str
+    reason: str
+    message: str
+
+class StatusSummary(BaseModel):
+    running: int
+    failed: int
+    total: int
+
+class ArgoCDApp(BaseModel):
+    name: str
+    sync: str
+    health: str
+
+class ClusterSummary(BaseModel):
+    nodes: int
+    pods: int
+    unhealthyPods: int
+    argocdDegraded: int
+    argocdOutOfSync: int
+
+
+
+@app.get("/health", response_model=HealthResponse)
 def health():
     return {"status": "ok"}
 
-@app.get("/pods")
+@app.get("/pods", response_model=list[PodResponse])
 def pods():
     result = []
 
@@ -32,7 +80,7 @@ def pods():
 
     return result
 
-@app.get("/pods/unhealthy")
+@app.get("/pods/unhealthy", response_model=list[UnhealthyPodResponse])
 def unhealthy_pods():
     result = []
 
@@ -63,7 +111,7 @@ def unhealthy_pods():
     return result
 
 
-@app.get("/nodes")
+@app.get("/nodes", response_model=list[NodeResponse])
 def nodes():
     result = []
 
@@ -74,7 +122,7 @@ def nodes():
 
     return result
 
-@app.get("/deployments")
+@app.get("/deployments", response_model=list[DeploymentResponse])
 def deployments():
     result = []
 
@@ -89,7 +137,7 @@ def deployments():
     return result
 
 
-@app.get("/events")
+@app.get("/events", response_model=list[EventResponse])
 def events():
     result = []
 
@@ -106,44 +154,49 @@ def events():
     return result
 
 
-@app.get("/falco/status")
+@app.get("/falco/status", response_model=StatusSummary)
 def falco_status():
 
     pods = v1.list_namespaced_pod("falco")
 
-    result = []
+    running = 0
+    failed = 0
 
 
     for pod in pods.items:
-        result.append({
-            "name": pod.metadata.name,
-            "phase": pod.status.phase
+        if pod.status.phase == "Running":
+           running += 1
+        else:
+           failed += 1
 
-        })
+    return {
+        "running": running,
+        "failed": failed,
+        "total": len(pods.items)
+        }
 
-    return result
-
-
-@app.get("/ceph/health")
+@app.get("/ceph/health", response_model=StatusSummary)
 def ceph_health():
 
     pods = v1.list_namespaced_pod("rook-ceph")
 
-    result = []
+    running = 0
+    failed = 0
 
 
     for pod in pods.items:
-        result.append({
-            "name": pod.metadata.name,
-            "phase": pod.status.phase 
+        if pod.status.phase == "Running":
+           running += 1
+        else:
+           failed += 1
 
-        })
+    return {
+        "running": running,
+        "failed": failed,
+        "total": len(pods.items)
+        }
 
-    return result
-
-
-
-@app.get("/argocd/apps")
+@app.get("/argocd/apps", response_model=list[ArgoCDApp])
 def argocd_apps():
 
     custom_api = client.CustomObjectsApi()
@@ -168,18 +221,7 @@ def argocd_apps():
     return result
 
 
-@app.get("/wazuh/agents")
-def wazuh_agents():
-
-
-    return {
-         "message":
-         "Implement API Integration"
-    }
-
-
-
-@app.get("/cluster/summary")
+@app.get("/cluster/summary", response_model=ClusterSummary)
 def cluster_summary():
 
     nodes = len(v1.list_node().items)
